@@ -103,7 +103,7 @@
           }
           if (weight >= pointranges[4])
           {
-            return colors[4];
+            return colors[4] - 1;
           }
           for (int i = 1; i < 5; i++)
           {
@@ -118,7 +118,7 @@
 
               float3 color_range = colors[i] - colors[i - 1];
 
-              float3 color_contribution = color_range * ratio_over_lower_point;
+              float3 color_contribution = color_range * ratio_over_lower_point - 1;
 
               float3 new_color = colors[i - 1] + color_contribution;
               return new_color;
@@ -140,6 +140,8 @@
         fixed4 frag(v2f i) : SV_Target
         {
           fixed4 col = tex2D(_MainTex, i.uv);
+        //fixed4 col = (1,1,1,1);
+
 
           initalize();
           float2 uv = i.uv;
